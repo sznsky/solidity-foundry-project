@@ -1,0 +1,16 @@
+sun@JT-SZN:~/solidity/solidity-foundry-project/Bank$ forge test -vv
+[⠊] Compiling...
+No files changed, compilation skipped
+
+Ran 8 tests for test/Bank.t.sol:BankTest
+[PASS] test_AssertDepositBalanceUpdated() (gas: 102680)
+[PASS] test_Top3_SameUserMultipleDeposits() (gas: 239709)
+[PASS] test_Top3_WithFourDepositors() (gas: 300105)
+[PASS] test_Top3_WithOneDepositor() (gas: 108917)
+[PASS] test_Top3_WithThreeDepositors() (gas: 263784)
+[PASS] test_Top3_WithTwoDepositors() (gas: 186297)
+[PASS] test_Withdrawal_ByAdmin_ShouldSucceed() (gas: 113843)
+[PASS] test_Withdrawal_ByNonAdmin_ShouldFail() (gas: 103406)
+Suite result: ok. 8 passed; 0 failed; 0 skipped; finished in 6.74ms (11.93ms CPU time)
+
+Ran 1 test suite in 51.13ms (6.74ms CPU time): 8 tests passed, 0 failed, 0 skipped (8 total tests)
