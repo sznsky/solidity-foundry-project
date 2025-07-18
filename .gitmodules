@@ -1,3 +1,9 @@
 [submodule "Bank/lib/forge-std"]
 	path = Bank/lib/forge-std
 	url = https://github.com/foundry-rs/forge-std
+[submodule "NFTMarket/lib/forge-std"]
+	path = NFTMarket/lib/forge-std
+	url = https://github.com/foundry-rs/forge-std
+[submodule "NFTMarket/lib/openzeppelin-contracts"]
+	path = NFTMarket/lib/openzeppelin-contracts
+	url = https://github.com/OpenZeppelin/openzeppelin-contracts
