@@ -7,3 +7,9 @@
 [submodule "NFTMarket/lib/openzeppelin-contracts"]
 	path = NFTMarket/lib/openzeppelin-contracts
 	url = https://github.com/OpenZeppelin/openzeppelin-contracts
+[submodule "NFTMarket-permit/lib/permit2"]
+	path = NFTMarket-permit/lib/permit2
+	url = https://github.com/Uniswap/permit2
+[submodule "NFTMarket-permit2/lib/permit2"]
+	path = NFTMarket-permit2/lib/permit2
+	url = https://github.com/uniswap-contracts/permit2
