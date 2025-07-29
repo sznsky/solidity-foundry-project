@@ -20,6 +20,7 @@ contract MemeLauncherFactory {
     }
 
     function deployMeme(
+        string memory name,
         string memory symbol,
         uint256 totalSupply,
         uint256 perMint,
@@ -28,7 +29,7 @@ contract MemeLauncherFactory {
         bytes32 salt = keccak256(abi.encodePacked(symbol, msg.sender, block.timestamp));
         tokenAddr = memeTokenImplementation.cloneDeterministic(salt); // clone 代理
 
-        MemeToken(tokenAddr).initialize(totalSupply, perMint, price, msg.sender);
+        MemeToken(tokenAddr).initialize(name, symbol, totalSupply, perMint, price, msg.sender);
 
         emit MemeDeployed(tokenAddr, msg.sender, symbol);
     }

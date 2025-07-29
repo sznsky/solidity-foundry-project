@@ -36,6 +36,7 @@ contract MemeLauncherTest is Test {
         vm.deal(memeIssuer2, 10 ether);
     }
 
+    // 测试部署合约和发行：包含费用分配和供应总量控制
     function testDeployMemeAndMint() public {
         // Meme 发行者 1 部署一个新的 Meme
         vm.startPrank(memeIssuer1);
@@ -44,7 +45,11 @@ contract MemeLauncherTest is Test {
         uint256 perMint1 = 1000;
         uint256 price1 = 0.1 ether; // 每次铸造 0.1 ETH
 
-        address meme1Addr = factory.deployMeme(symbol1, totalSupply1, perMint1, price1);
+        //address meme1Addr = factory.deployMeme(symbol1, totalSupply1, perMint1, price1);
+
+        string memory name1 = "My Awesome Meme Coin"; // 新增 name
+        address meme1Addr = factory.deployMeme(name1, symbol1, totalSupply1, perMint1, price1);
+
         vm.stopPrank();
 
         console2.log("Meme 1 deployed at:", meme1Addr);
@@ -52,7 +57,7 @@ contract MemeLauncherTest is Test {
         // 检查 MemeToken 实例的属性 (通过代理访问)
         MemeToken meme1 = MemeToken(meme1Addr);
         assertEq(meme1.symbol(), symbol1);
-        assertEq(meme1.name(), "My Awesome Meme Coin"); // 固定名称
+        assertEq(meme1.name(), name1); // 固定名称
         assertEq(meme1.TOTAL_SUPPLY(), totalSupply1);
         assertEq(meme1.PER_MINT_AMOUNT(), perMint1);
         assertEq(meme1.MINT_PRICE(), price1);
@@ -124,12 +129,17 @@ contract MemeLauncherTest is Test {
         uint256 perMint2 = 500;
         uint256 price2 = 0.05 ether;
 
-        address meme2Addr = factory.deployMeme(symbol2, totalSupply2, perMint2, price2);
+        //address meme2Addr = factory.deployMeme(symbol2, totalSupply2, perMint2, price2);
+
+        string memory name2 = "Another Awesome Moon Coin"; // 新增 name
+        address meme2Addr = factory.deployMeme(name2, symbol2, totalSupply2, perMint2, price2);
+
         vm.stopPrank();
 
         console2.log("Meme 2 deployed at:", meme2Addr);
         MemeToken meme2 = MemeToken(meme2Addr);
         assertEq(meme2.symbol(), symbol2);
+        assertEq(meme2.name(), name2);
         assertEq(meme2.TOTAL_SUPPLY(), totalSupply2);
         assertEq(meme2.PER_MINT_AMOUNT(), perMint2);
         assertEq(meme2.MINT_PRICE(), price2);

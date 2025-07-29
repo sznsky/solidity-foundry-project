@@ -21,13 +21,13 @@ contract MemeToken is Initializable, ERC20Upgradeable, OwnableUpgradeable{
     address public memeIssuer; // 发行者地址，谁调用factory 部署这个meme
     
     // 添加初始化函数:`initializer` 修饰符防止重复调用
-    function initialize(uint256 _totalSupply, uint256 _perMintAmount, uint256 _mintPrice, address _memeIssuer)
+    function initialize(string memory name,string memory symbol, uint256 _totalSupply, uint256 _perMintAmount, uint256 _mintPrice, address _memeIssuer)
         initializer // <--- 初始化修饰符
         public
     {
         // 调用父合约的初始化函数
 
-        __ERC20_init("My Awesome Meme Coin", "MEME1"); // <--- 现在这对于 ERC20Upgradeable 是正确的
+        __ERC20_init(name, symbol); // <--- 现在这对于 ERC20Upgradeable 是正确的
         __Ownable_init();
 
         TOTAL_SUPPLY = _totalSupply;
