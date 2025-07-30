@@ -28,7 +28,7 @@ contract MemeLauncherFactory {
     ) external returns (address tokenAddr) {
         bytes32 salt = keccak256(abi.encodePacked(symbol, msg.sender, block.timestamp));
         tokenAddr = memeTokenImplementation.cloneDeterministic(salt); // clone 代理
-
+        // 代理地址生成了以后，才开始初始化token信息，也就是先生成合约地址，再去初始化合约信息的
         MemeToken(tokenAddr).initialize(name, symbol, totalSupply, perMint, price, msg.sender);
 
         emit MemeDeployed(tokenAddr, msg.sender, symbol);

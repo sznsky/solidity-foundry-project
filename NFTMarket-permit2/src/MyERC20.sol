@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.20;
+pragma solidity ^0.8.17;
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract MyERC20 is ERC20, Ownable {
-    constructor() ERC20("MyERC20", "MYC") Ownable(msg.sender){
+    constructor() ERC20("MyERC20", "MYC") Ownable(){
         // Mint initial supply to the contract deployer
         _mint(msg.sender, 100000000 * 10 ** decimals());
     }

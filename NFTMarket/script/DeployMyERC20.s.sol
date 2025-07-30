@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.17;
+pragma solidity ^0.8.20;
 
-import "forge-std/console.sol";
 import "forge-std/Script.sol";
 import "../src/MyERC20.sol"; // 引入你的合约
 

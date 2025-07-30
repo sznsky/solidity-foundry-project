@@ -2,10 +2,10 @@
 pragma solidity ^0.8.20;
 
 import "forge-std/Script.sol";
-import "../src/MyERC20Permit.sol"; // 引入你的合约
+import "../src/MyERC20.sol"; // 引入你的合约
 
-contract DeployMyERC20Permit is Script {
-    function run() public returns (MyERC20Permit) {
+contract DeployMyERC20 is Script {
+    function run() public returns (MyERC20) {
         // 加载私钥 (推荐使用环境变量)
         // 例如：vm.envUint("PRIVATE_KEY")
         // 或者直接使用 Foundry 命令行参数 --private-key
@@ -15,12 +15,12 @@ contract DeployMyERC20Permit is Script {
         vm.startBroadcast(deployerPrivateKey);
 
         // 部署 MyERC20 合约
-        MyERC20Permit  myTokenPermit = new MyERC20Permit();
+        MyERC20 myToken = new MyERC20();
 
         // 停止广播
         vm.stopBroadcast();
 
-        console.log("MyERC20 deployed at:", address(myTokenPermit));
-        return myTokenPermit;
+        console.log("MyERC20 deployed at:", address(myToken));
+        return myToken;
     }
 }
