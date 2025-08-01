@@ -40,3 +40,6 @@
 [submodule "MemeLauncher/lib/openzeppelin-contracts-upgradeable"]
 	path = MemeLauncher/lib/openzeppelin-contracts-upgradeable
 	url = https://github.com/OpenZeppelin/openzeppelin-contracts-upgradeable
+[submodule "AirdopMerkleNFTMarket/lib/openzeppelin-contracts"]
+	path = AirdopMerkleNFTMarket/lib/openzeppelin-contracts
+	url = https://github.com/OpenZeppelin/openzeppelin-contracts

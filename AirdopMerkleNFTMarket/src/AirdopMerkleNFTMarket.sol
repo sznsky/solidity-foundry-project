@@ -1,12 +1,13 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-
-import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
-import "@openzeppelin/contracts/token/ERC20/extensions/IERC20Permit.sol";
-import "@openzeppelin/contracts/utils/cryptography/MerkleProof.sol";
-import "@openzeppelin/contracts/utils/Multicall.sol";
-import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
+import "@openzeppelin-contracts/contracts/token/ERC20/IERC20.sol";
+import "@openzeppelin-contracts/contracts/token/ERC721/IERC721.sol";
+import "@openzeppelin-contracts/contracts/token/ERC20/extensions/IERC20Permit.sol";
+import "@openzeppelin-contracts/contracts/utils/cryptography/MerkleProof.sol";
+import "@openzeppelin-contracts/contracts/utils/Multicall.sol";
+import "@openzeppelin-contracts/contracts/utils/ReentrancyGuard.sol";
+import "./MyERC20Permit.sol";
 
 contract AirdopMerkleNFTMarket is Multicall, ReentrancyGuard {
 
@@ -16,7 +17,7 @@ contract AirdopMerkleNFTMarket is Multicall, ReentrancyGuard {
     error InvalidMerkleProof();
     error NotTheSeller();
 
-    IERC20Permit public immutable token;
+    MyERC20Permit public immutable token;
     IERC721 public immutable nft;
     bytes32 public immutable merkleRoot;
 
@@ -32,17 +33,25 @@ contract AirdopMerkleNFTMarket is Multicall, ReentrancyGuard {
     event Delisted(uint256 indexed tokenId);
 
     constructor(address tokenAddress, address nftAddress, bytes32 _merkleRoot) {
-        token = IERC20Permit(tokenAddress);
+        token = MyERC20Permit(tokenAddress);
         nft = IERC721(nftAddress);
         merkleRoot = _merkleRoot;
     }
 
-    // 上架
+    // 上架：注意上架之前，nft已经上架给nft市场了（必须）
     function list(uint256 tokenId, uint256 price) external {
+        // 检查调用者是否是所有者
         if (nft.ownerOf(tokenId) != msg.sender) revert NotNFTOwner();
+        // 上架价格不能为0
         if (price == 0) revert PriceMustBeGreaterThanZero();
+        // 检查nft是否已经授权给nft市场了
+        // OpenZeppelin 的 ERC721 提供了一个 `getApproved` 函数。
+        if (nft.getApproved(tokenId) != address(this)){
+            // 这里可以抛出异常
+        }
 
-        nft.approve(address(this), tokenId);
+        //nft.approve(address(this), tokenId); // 无需再次授权
+        // 上架操作
         listings[tokenId] = Listing(price, msg.sender);
         emit Listed(tokenId, price, msg.sender);
     }
@@ -78,18 +87,8 @@ contract AirdopMerkleNFTMarket is Multicall, ReentrancyGuard {
         // TOKEN从买家转入卖家
         token.transferFrom(msg.sender, listing.seller, discountedPrice);
         // NFT从市场合约转入买家
-        nft.transferFrom(address(this), msg.sender, tokenId);
+        nft.transferFrom(listing.seller, msg.sender, tokenId);
 
         emit Sold(tokenId, discountedPrice, listing.seller, msg.sender);
     }
-
-    
-
-
-
-
-
-
-
-
 }
