@@ -38,9 +38,11 @@ contract Bank is AutomationCompatibleInterface {
     // 被chainlink调用
     function performUpkeep(bytes calldata /* performData */) external override {
         require(address(this).balance >= threshold, "Not enough balance");
-
+        // 存款
         uint256 amount = address(this).balance;
-        (bool success, ) = vault.call{value:amount}("");
+        // 存款的一半
+        uint256 half = amount / 2;
+        (bool success, ) = vault.call{value:half}("");
         require(success, "Transfer failed");
     }
 }
