@@ -70,3 +70,9 @@
 [submodule "openspace_ctf/lib/forge-std"]
 	path = openspace_ctf/lib/forge-std
 	url = https://github.com/foundry-rs/forge-std
+[submodule "Bank-Automation/lib/forge-std"]
+	path = Bank-Automation/lib/forge-std
+	url = https://github.com/foundry-rs/forge-std
+[submodule "Bank-Automation/lib/chainlink-brownie-contracts"]
+	path = Bank-Automation/lib/chainlink-brownie-contracts
+	url = https://github.com/smartcontractkit/chainlink-brownie-contracts
