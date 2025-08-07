@@ -76,3 +76,9 @@
 [submodule "Bank-Automation/lib/chainlink-brownie-contracts"]
 	path = Bank-Automation/lib/chainlink-brownie-contracts
 	url = https://github.com/smartcontractkit/chainlink-brownie-contracts
+[submodule "MultiVesting/lib/forge-std"]
+	path = MultiVesting/lib/forge-std
+	url = https://github.com/foundry-rs/forge-std
+[submodule "MultiVesting/lib/openzeppelin-contracts"]
+	path = MultiVesting/lib/openzeppelin-contracts
+	url = https://github.com/OpenZeppelin/openzeppelin-contracts
